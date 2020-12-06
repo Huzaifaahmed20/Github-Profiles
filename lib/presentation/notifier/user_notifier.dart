@@ -14,7 +14,6 @@ class UserNotifier with ChangeNotifier {
 
     _user = response;
     setLoading(false);
-    notifyListeners();
   }
 
   void setLoading(bool value) {
