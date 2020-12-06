@@ -4,11 +4,14 @@ import 'package:github_profiles/presentation/pages/pages.dart';
 
 class AppRoutes {
   static const String userDetails = 'user-details';
+  static const String home = '/';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case userDetails:
         return _buildRoute(UserDetails(), settings);
+      case home:
+        return _buildRoute(HomePage(), settings);
       default:
         return _buildRoute(HomePage(), settings);
     }
