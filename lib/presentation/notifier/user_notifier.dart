@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
 
@@ -6,7 +7,9 @@ class UserNotifier with ChangeNotifier {
   bool isLoading = false;
   GithubApi _githubApi = GithubApi();
   UserInfo _user;
+  List<ReposInfo> _repos;
   UserInfo get user => _user;
+  List<ReposInfo> get repos => _repos;
 
   Future<void> fetchUserInfo(String username) async {
     setLoading(true);
@@ -14,6 +17,14 @@ class UserNotifier with ChangeNotifier {
 
     _user = response;
     setLoading(false);
+  }
+
+  Future<void> fetReposInfo(String username) async {
+    final List<ReposInfo> response =
+        await _githubApi.getRepos(username: username);
+
+    _repos = response;
+    notifyListeners();
   }
 
   void setLoading(bool value) {

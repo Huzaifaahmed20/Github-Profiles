@@ -11,4 +11,5 @@ class Endpoints {
   static const int connectionTimeout = 3000;
 
   static const String userInfo = '/users';
+  static const String repos = '/repos';
 }
