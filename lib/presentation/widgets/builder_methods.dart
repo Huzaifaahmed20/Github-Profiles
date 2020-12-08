@@ -49,8 +49,9 @@ class BuilderMethods {
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         children: reposInfo.map((e) {
           return Container(
             decoration: BoxDecoration(
@@ -60,13 +61,13 @@ class BuilderMethods {
                 borderRadius: BorderRadius.all(Radius.circular(12.0))),
             child: Card(
               color: Colors.black,
-              child: Column(
-                children: [
-                  Text(
-                    e.name,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+              child: Center(
+                child: Text(
+                  e.name,
+                  style: TextStyle(color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
               ),
             ),
           );

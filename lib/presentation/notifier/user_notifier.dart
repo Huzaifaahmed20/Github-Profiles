@@ -20,11 +20,13 @@ class UserNotifier with ChangeNotifier {
   }
 
   Future<void> fetReposInfo(String username) async {
+    setLoading(true);
+
     final List<ReposInfo> response =
         await _githubApi.getRepos(username: username);
 
     _repos = response;
-    notifyListeners();
+    setLoading(false);
   }
 
   void setLoading(bool value) {
