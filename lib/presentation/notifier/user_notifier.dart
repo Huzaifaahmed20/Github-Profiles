@@ -11,11 +11,13 @@ import 'package:stacked_services/stacked_services.dart';
 class UserNotifier with ChangeNotifier {
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
-  bool isLoading = false;
   GithubApi _githubApi = GithubApi();
+  bool isLoading = false;
+
   UserInfo _user;
-  List<ReposInfo> _repos;
   UserInfo get user => _user;
+
+  List<ReposInfo> _repos;
   List<ReposInfo> get repos => _repos;
 
   Future<void> fetchUserInfo(String username) async {
