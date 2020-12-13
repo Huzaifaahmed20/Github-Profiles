@@ -13,13 +13,25 @@ class UserDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 50),
           BuilderMethods.buildProfile(userInfo),
           const SizedBox(height: 20),
           BuilderMethods.buildFollowers(userInfo),
           const SizedBox(height: 20),
-          BuilderMethods.buildReposGrid(reposInfo)
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'Repositories',
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          BuilderMethods.buildReposGrid(reposInfo, context)
         ],
       ),
     );

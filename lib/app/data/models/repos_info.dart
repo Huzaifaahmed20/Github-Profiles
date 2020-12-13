@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 
 class ReposInfo {
-  String name, url;
+  String name, html_url;
 
   ReposInfo({
     @required this.name,
-    @required this.url,
+    @required this.html_url,
   });
 
   static ReposInfo fromMap(Map<String, dynamic> map) {
@@ -13,19 +13,19 @@ class ReposInfo {
 
     return ReposInfo(
       name: map['name'],
-      url: map['url'],
+      html_url: map['html_url'],
     );
   }
 
   ReposInfo.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    url = json['url'];
+    html_url = json['html_url'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
-    data['url'] = this.url;
+    data['html_url'] = this.html_url;
     return data;
   }
 }

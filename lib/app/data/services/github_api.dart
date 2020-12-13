@@ -9,9 +9,7 @@ class GithubApi {
   Future<UserInfo> getUserInfo({String username}) async {
     try {
       final res = await _client.get('${Endpoints.userInfo}/$username');
-      if (res != null) {
-        return UserInfo.fromJson(res);
-      }
+      return UserInfo.fromJson(res);
     } catch (e) {
       throw e;
     }
@@ -21,12 +19,13 @@ class GithubApi {
     List<ReposInfo> _repos = [];
     final List res =
         await _client.get('${Endpoints.userInfo}/$username/${Endpoints.repos}');
-
-    if (res != null) {
-      _repos = res.map((e) => ReposInfo.fromMap(e)).toList();
-      return _repos;
-    } else {
-      return null;
+    try {
+      if (res != null) {
+        _repos = res.map((e) => ReposInfo.fromMap(e)).toList();
+        return _repos;
+      }
+    } catch (e) {
+      throw e;
     }
   }
 }
