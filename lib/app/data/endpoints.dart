@@ -8,7 +8,7 @@ class Endpoints {
   static const int receiveTimeout = 5000;
 
   // connectTimeout
-  static const int connectionTimeout = 3000;
+  static const int connectionTimeout = 10000;
 
   static const String userInfo = '/users';
   static const String repos = '/repos';

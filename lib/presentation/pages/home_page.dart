@@ -12,8 +12,9 @@ class HomePage extends StatelessWidget {
     Future<void> getUserInfo() async {
       if (userNameController.text.isEmpty) return;
       await context.read<UserNotifier>().fetchUserInfo(userNameController.text);
-      await context.read<UserNotifier>().fetReposInfo(userNameController.text);
-      Navigator.of(context).pushNamed(AppRoutes.userDetails);
+
+      // await context.read<UserNotifier>().fetReposInfo(userNameController.text);
+      // Navigator.of(context).pushNamed(AppRoutes.userDetails);
     }
 
     return Scaffold(

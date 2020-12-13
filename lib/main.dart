@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
 import 'package:github_profiles/presentation/notifier/user_notifier.dart';
-import 'package:github_profiles/presentation/pages/pages.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,6 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        navigatorKey: AppRoutes.navigatorKey,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.onGenerateRoute,
       ),

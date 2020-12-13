@@ -28,7 +28,7 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      return e;
+      throw e;
     }
   }
 
@@ -41,19 +41,15 @@ class DioClient {
     ProgressCallback onSendProgress,
     ProgressCallback onReceiveProgress,
   }) async {
-    try {
-      final Response response = await _dio.post(
-        uri,
-        data: data,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    final Response response = await _dio.post(
+      uri,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+    return response.data;
   }
 }

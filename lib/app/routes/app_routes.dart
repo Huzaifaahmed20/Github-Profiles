@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:github_profiles/presentation/pages/pages.dart';
 
 class AppRoutes {
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
   static const String userDetails = 'user-details';
   static const String home = '/';
 

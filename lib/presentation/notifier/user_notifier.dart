@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:github_profiles/app/data/models/not_found_exception.dart';
 import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
+import 'package:github_profiles/app/routes/app_routes.dart';
 
 class UserNotifier with ChangeNotifier {
   bool isLoading = false;
@@ -13,10 +17,18 @@ class UserNotifier with ChangeNotifier {
 
   Future<void> fetchUserInfo(String username) async {
     setLoading(true);
-    final UserInfo response = await _githubApi.getUserInfo(username: username);
+    try {
+      final UserInfo response =
+          await _githubApi.getUserInfo(username: username);
 
-    _user = response;
-    setLoading(false);
+      _user = response;
+      setLoading(false);
+    } catch (e) {
+      final NotFoundException error =
+          NotFoundException(message: e.response.data["message"]);
+      print(error.message);
+      setLoading(false);
+    }
   }
 
   Future<void> fetReposInfo(String username) async {

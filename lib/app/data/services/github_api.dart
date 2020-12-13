@@ -7,12 +7,13 @@ class GithubApi {
   DioClient _client = DioClient();
 
   Future<UserInfo> getUserInfo({String username}) async {
-    final res = await _client.get('${Endpoints.userInfo}/$username');
-
-    if (res != null) {
-      return UserInfo.fromJson(res);
-    } else {
-      return null;
+    try {
+      final res = await _client.get('${Endpoints.userInfo}/$username');
+      if (res != null) {
+        return UserInfo.fromJson(res);
+      }
+    } catch (e) {
+      throw e;
     }
   }
 
