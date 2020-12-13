@@ -9,9 +9,10 @@ import 'package:github_profiles/app/routes/app_routes.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class UserNotifier with ChangeNotifier {
+  GithubApi _githubApi = GithubApi();
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
-  GithubApi _githubApi = GithubApi();
+
   bool isLoading = false;
 
   UserInfo _user;
