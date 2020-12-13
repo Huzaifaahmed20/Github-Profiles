@@ -47,32 +47,36 @@ class BuilderMethods {
 
   static Widget buildReposGrid(List<ReposInfo> reposInfo) {
     return Expanded(
-      child: GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        children: reposInfo.map((e) {
-          return Container(
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(12.0))),
-            child: Card(
-              color: Colors.black,
-              child: Center(
-                child: Text(
-                  e.name,
-                  style: TextStyle(color: Colors.white),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ),
+      child: reposInfo == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              children: reposInfo.map((e) {
+                return Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                  child: Card(
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        e.name,
+                        style: TextStyle(color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
-          );
-        }).toList(),
-      ),
     );
   }
 }

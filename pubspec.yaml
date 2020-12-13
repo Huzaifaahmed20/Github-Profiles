@@ -25,7 +25,8 @@ dependencies:
     sdk: flutter
   provider: ^4.3.2+2
   dio: ^3.0.10
-
+  stacked_services: ^0.6.0+1
+  get_it: ^5.0.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0

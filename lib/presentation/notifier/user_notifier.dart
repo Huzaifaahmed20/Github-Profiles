@@ -5,9 +5,13 @@ import 'package:github_profiles/app/data/models/not_found_exception.dart';
 import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
+import 'package:github_profiles/app/locator.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class UserNotifier with ChangeNotifier {
+  final NavigationService _navigationService = locator<NavigationService>();
+  final DialogService _dialogService = locator<DialogService>();
   bool isLoading = false;
   GithubApi _githubApi = GithubApi();
   UserInfo _user;
@@ -23,10 +27,13 @@ class UserNotifier with ChangeNotifier {
 
       _user = response;
       setLoading(false);
+      _navigationService.navigateTo(AppRoutes.userDetails);
     } catch (e) {
       final NotFoundException error =
           NotFoundException(message: e.response.data["message"]);
-      print(error.message);
+      _dialogService.showDialog(
+          title: 'Error',
+          description: 'User with this username ${error.message}');
       setLoading(false);
     }
   }
