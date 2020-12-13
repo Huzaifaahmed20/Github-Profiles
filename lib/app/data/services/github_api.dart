@@ -20,10 +20,8 @@ class GithubApi {
     final List res =
         await _client.get('${Endpoints.userInfo}/$username/${Endpoints.repos}');
     try {
-      if (res != null) {
-        _repos = res.map((e) => ReposInfo.fromMap(e)).toList();
-        return _repos;
-      }
+      _repos = res.map((e) => ReposInfo.fromMap(e)).toList();
+      return _repos;
     } catch (e) {
       throw e;
     }
