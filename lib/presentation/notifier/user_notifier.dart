@@ -33,21 +33,25 @@ class UserNotifier with ChangeNotifier {
     } catch (e) {
       final NotFoundException error =
           NotFoundException(message: e.response.data["message"]);
+      setLoading(false);
       _dialogService.showDialog(
           title: 'Error',
           description: 'User with this username ${error.message}');
-      setLoading(false);
     }
   }
 
   Future<void> fetReposInfo(String username) async {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    final List<ReposInfo> response =
-        await _githubApi.getRepos(username: username);
+      final List<ReposInfo> response =
+          await _githubApi.getRepos(username: username);
 
-    _repos = response;
-    setLoading(false);
+      _repos = response;
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
   }
 
   void setLoading(bool value) {
