@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_profiles/app/locator.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
-import 'package:github_profiles/presentation/notifier/user_notifier.dart';
+import 'package:github_profiles/notifier/user_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 

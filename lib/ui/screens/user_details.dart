@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_profiles/presentation/notifier/user_notifier.dart';
-import 'package:github_profiles/presentation/widgets/builder_methods.dart';
+import 'package:github_profiles/notifier/user_notifier.dart';
+import 'package:github_profiles/ui/widgets/builder_methods.dart';
 import 'package:provider/provider.dart';
 
 class UserDetails extends StatelessWidget {
