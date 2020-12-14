@@ -5,7 +5,7 @@ import 'package:github_profiles/ui/screens/repos_web_view.dart';
 
 class AppRoutes {
   static const String home = '/';
-  static const String userDetails = 'user-details';
+  static const String userDetails = '/user-details';
   static const String reposWebView = '/repon-web-view';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
