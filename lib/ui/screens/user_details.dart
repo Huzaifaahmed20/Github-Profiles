@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_profiles/notifier/user_notifier.dart';
-import 'package:github_profiles/ui/widgets/builder_methods.dart';
 import 'package:provider/provider.dart';
+import 'package:github_profiles/ui/widgets/widgets.dart';
 
 class UserDetails extends StatelessWidget {
   const UserDetails({Key key}) : super(key: key);
@@ -16,9 +16,9 @@ class UserDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 50),
-          BuilderMethods.buildProfile(userInfo),
+          UserProile(userInfo: userInfo),
           const SizedBox(height: 20),
-          BuilderMethods.buildFollowers(userInfo),
+          FollowersDetails(userInfo: userInfo),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 20),
@@ -31,7 +31,7 @@ class UserDetails extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          BuilderMethods.buildReposGrid(reposInfo, context)
+          ReposGrid(reposInfo: reposInfo)
         ],
       ),
     );

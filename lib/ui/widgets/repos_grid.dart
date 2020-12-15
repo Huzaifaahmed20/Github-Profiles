@@ -2,51 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
 
-class BuilderMethods {
-  BuilderMethods._();
-  static Widget buildProfile(userInfo) {
-    return ListTile(
-      isThreeLine: true,
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(userInfo.avatar_url),
-      ),
-      title: Text(
-        userInfo.name ?? '',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        userInfo.bio ?? '',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
+class ReposGrid extends StatelessWidget {
+  final List<ReposInfo> reposInfo;
 
-  static Widget buildFollowers(userInfo) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.person,
-            color: Colors.white,
-          ),
-          const SizedBox(width: 10),
-          Text(
-            '${userInfo.followers} followers',
-            style: TextStyle(color: Colors.white),
-          ),
-          const SizedBox(width: 20),
-          Text(
-            '${userInfo.following} following',
-            style: TextStyle(color: Colors.white),
-          )
-        ],
-      ),
-    );
-  }
+  const ReposGrid({
+    Key key,
+    this.reposInfo,
+  }) : super(key: key);
 
-  static Widget buildReposGrid(List<ReposInfo> reposInfo, BuildContext ctx) {
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: reposInfo == null
           ? Center(
@@ -60,7 +25,7 @@ class BuilderMethods {
               children: reposInfo.map((e) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(ctx).pushNamed(AppRoutes.reposWebView,
+                    Navigator.of(context).pushNamed(AppRoutes.reposWebView,
                         arguments: e.html_url);
                   },
                   child: Container(
