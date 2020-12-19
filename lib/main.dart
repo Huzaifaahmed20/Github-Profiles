@@ -5,8 +5,11 @@ import 'package:github_profiles/services/third_party_services.dart';
 import 'package:hooks_riverpod/all.dart';
 
 void main() {
-  // setupLocator();
-  runApp(ProviderScope(child: MyApp()));
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends HookWidget {
