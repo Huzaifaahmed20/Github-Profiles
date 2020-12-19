@@ -2,6 +2,11 @@ import 'package:github_profiles/app/data/dio_client.dart';
 import 'package:github_profiles/app/data/endpoints.dart';
 import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
+import 'package:hooks_riverpod/all.dart';
+
+final githubApiProvider = Provider<GithubApi>((ref) {
+  return GithubApi();
+});
 
 class GithubApi {
   DioClient _client = DioClient();

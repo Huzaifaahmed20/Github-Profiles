@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:github_profiles/notifier/user_notifier.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:github_profiles/app/data/models/user_info.dart';
+import 'package:github_profiles/app/data/services/github_api.dart';
+import 'package:github_profiles/state_provider/user_provider.dart';
+import 'package:hooks_riverpod/all.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends HookWidget {
+  void getProfile(
+      BuildContext context, TextEditingController userNameController) async {
+    if (userNameController.text.isEmpty) return;
+
+    await context
+        .read(userControllerProvider)
+        .fetchUserInfo(userNameController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController userNameController = TextEditingController();
-    final model = context.watch<UserNotifier>();
-
-    Future<void> getUserInfo() async {
-      if (userNameController.text.isEmpty) return;
-      await context.read<UserNotifier>().fetchUserInfo(userNameController.text);
-      await context.read<UserNotifier>().fetReposInfo(userNameController.text);
-    }
+    final userNameController = useTextEditingController();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -47,35 +52,55 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: model.isLoading
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.center,
-                      children: [
-                        Text('Get my Github Profile'),
-                        model.isLoading
-                            ? Container(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.white,
-                                ),
-                              )
-                            : const SizedBox.shrink()
-                      ],
-                    ),
-                  ),
-                  onPressed: getUserInfo,
-                ),
+              CustomButton(
+                userNameController: userNameController,
+                onPressed: () => getProfile(context, userNameController),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends HookWidget {
+  CustomButton({
+    Key key,
+    @required this.userNameController,
+    @required this.onPressed,
+  }) : super(key: key);
+
+  final VoidCallback onPressed;
+  final TextEditingController userNameController;
+  final userControllerState = useProvider(userControllerProvider.state);
+  @override
+  Widget build(BuildContext context) {
+    final isLoading = userControllerState.data == null;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 60),
+      child: ElevatedButton(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            mainAxisAlignment: isLoading
+                ? MainAxisAlignment.spaceAround
+                : MainAxisAlignment.center,
+            children: [
+              Text('Get my Github Profile'),
+              isLoading
+                  ? Container(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    )
+                  : const SizedBox.shrink()
+            ],
+          ),
+        ),
+        onPressed: onPressed,
       ),
     );
   }
