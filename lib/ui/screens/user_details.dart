@@ -12,31 +12,35 @@ class UserDetails extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final reposInfo = context.watch<UserNotifier>().repos;
+    final userControllerState = useProvider(userControllerProvider.state);
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 50),
-          // UserProile(userInfo: model),
-
-          const SizedBox(height: 20),
-          // FollowersDetails(userInfo: model.user),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              'Repositories',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
+      body: userControllerState.when(
+        data: (user) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 50),
+            UserProile(userInfo: user),
+            const SizedBox(height: 20),
+            FollowersDetails(userInfo: user),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Repositories',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          // ReposGrid(reposInfo: reposInfo)
-        ],
+            const SizedBox(height: 20),
+            // ReposGrid(reposInfo: reposInfo)
+          ],
+        ),
+        loading: () => Center(child: CircularProgressIndicator()),
+        error: (err, _) =>
+            Center(child: Text('An unexpected error occurred 😢')),
       ),
     );
   }
