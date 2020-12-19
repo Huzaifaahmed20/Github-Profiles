@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
 import 'package:github_profiles/services/third_party_services.dart';
 import 'package:hooks_riverpod/all.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 void main() {
   // setupLocator();

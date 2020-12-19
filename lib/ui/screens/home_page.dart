@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:github_profiles/app/data/models/user_info.dart';
-import 'package:github_profiles/app/data/services/github_api.dart';
 import 'package:github_profiles/state_provider/user_provider.dart';
 import 'package:hooks_riverpod/all.dart';
 

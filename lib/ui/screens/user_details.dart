@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:github_profiles/state_provider/user_provider.dart';
-import 'package:github_profiles/ui/screens/home_page.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:github_profiles/ui/widgets/widgets.dart';
-import 'package:github_profiles/app/data/services/github_api.dart';
-import 'package:hooks_riverpod/all.dart';
 
 class UserDetails extends HookWidget {
   const UserDetails({Key key}) : super(key: key);
