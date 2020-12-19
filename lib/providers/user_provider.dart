@@ -1,4 +1,5 @@
-import 'package:github_profiles/app/data/models/not_found_exception.dart';
+import 'package:dio/dio.dart';
+import 'package:github_profiles/app/data/models/exceptions.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
 import 'package:github_profiles/services/third_party_services.dart';
@@ -34,28 +35,12 @@ class UserController extends StateNotifier<AsyncValue<UserInfo>> {
       state = AsyncValue.data(user);
 
       return user;
-    } catch (e) {
-      final NotFoundException error =
-          NotFoundException(message: e.response.data["message"]);
-      state = AsyncValue.error(error.message);
+    } on DioError catch (dioError) {
+      final error = DioExceptions.fromDioError(dioError);
+      state = AsyncValue.error(error);
       _dialogService.showDialog(
-          title: 'Error',
-          description: 'User with this username ${error.message}');
+          title: 'Error', description: 'User with this username $error');
+      return;
     }
   }
-
-  // Future<void> fetReposInfo(String username) async {
-  //   try {
-  //     setLoading(true);
-
-  //     final List<ReposInfo> response =
-  //         await _githubApi.getRepos(username: username);
-
-  //     _repos = response;
-  //     setLoading(false);
-  //   } catch (e) {
-  //     setLoading(false);
-  //   }
-  // }
-
 }

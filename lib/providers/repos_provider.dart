@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:github_profiles/app/data/models/exceptions.dart';
 import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
@@ -29,9 +31,10 @@ class ReposController extends StateNotifier<AsyncValue<List<ReposInfo>>> {
       state = AsyncValue.data(repos);
       _navigationService.navigateTo(AppRoutes.userDetails);
       return repos;
-    } catch (e) {
-      state = AsyncValue.error(e.message);
-      throw e;
+    } on DioError catch (dioError) {
+      final error = DioExceptions.fromDioError(dioError);
+      state = AsyncValue.error(error);
+      return;
     }
   }
 }
