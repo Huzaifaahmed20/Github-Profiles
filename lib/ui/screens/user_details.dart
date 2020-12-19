@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:github_profiles/state_provider/repos_provider.dart';
 import 'package:github_profiles/state_provider/user_provider.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:github_profiles/ui/widgets/widgets.dart';
@@ -10,6 +11,7 @@ class UserDetails extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final userControllerState = useProvider(userControllerProvider.state);
+    final repoControllerState = useProvider(repoControllerProvider.state);
     return Scaffold(
       backgroundColor: Colors.black,
       body: userControllerState.when(
@@ -32,7 +34,12 @@ class UserDetails extends HookWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // ReposGrid(reposInfo: reposInfo)
+            repoControllerState.when(
+              data: (reposInfo) => ReposGrid(reposInfo: reposInfo),
+              loading: () => Center(child: CircularProgressIndicator()),
+              error: (err, _) =>
+                  Center(child: Text('An unexpected error occurred 😢')),
+            )
           ],
         ),
         loading: () => Center(child: CircularProgressIndicator()),

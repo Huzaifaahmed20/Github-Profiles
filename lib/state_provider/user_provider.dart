@@ -1,25 +1,21 @@
 import 'package:github_profiles/app/data/models/not_found_exception.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
-import 'package:github_profiles/app/routes/app_routes.dart';
 import 'package:github_profiles/services/third_party_services.dart';
 import 'package:hooks_riverpod/all.dart';
 
 final userControllerProvider = StateNotifierProvider<UserController>((ref) {
   final githubApi = ref.watch(githubApiProvider);
-  final navigationService = ref.watch(navigationServiceProvider);
   final dialogService = ref.watch(dialogServiceProvider);
-  return UserController(githubApi, navigationService, dialogService);
+  return UserController(githubApi, dialogService);
 });
 
 class UserController extends StateNotifier<AsyncValue<UserInfo>> {
   final _githubApi;
-  final _navigationService;
   final _dialogService;
 
   UserController(
     this._githubApi,
-    this._navigationService,
     this._dialogService, [
     AsyncValue<UserInfo> state,
   ]) : super(state ??
@@ -37,7 +33,6 @@ class UserController extends StateNotifier<AsyncValue<UserInfo>> {
 
       state = AsyncValue.data(user);
 
-      _navigationService.navigateTo(AppRoutes.userDetails);
       return user;
     } catch (e) {
       final NotFoundException error =
