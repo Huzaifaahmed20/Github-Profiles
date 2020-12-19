@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:github_profiles/ui/screens/screens.dart';
 
 class AppRoutes {
