@@ -31,7 +31,7 @@ class DioExceptions implements Exception {
 
   String message;
 
-  String _handleError(int statusCode, error) {
+  String _handleError(int statusCode, dynamic error) {
     final String errorMessage =
         NotFoundException(message: error["message"]).message;
     switch (statusCode) {

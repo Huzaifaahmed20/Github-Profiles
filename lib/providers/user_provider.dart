@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:github_profiles/app/data/models/exceptions.dart';
+import 'package:github_profiles/app/data/exceptions.dart';
 import 'package:github_profiles/app/data/models/user_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
 import 'package:github_profiles/services/third_party_services.dart';
@@ -36,10 +36,9 @@ class UserController extends StateNotifier<AsyncValue<UserInfo>> {
 
       return user;
     } on DioError catch (dioError) {
-      final error = DioExceptions.fromDioError(dioError);
+      final error = DioExceptions.fromDioError(dioError).toString();
       state = AsyncValue.error(error);
-      _dialogService.showDialog(
-          title: 'Error', description: 'User with this username $error');
+      _dialogService.showDialog(title: 'Error', description: '$error');
       return;
     }
   }

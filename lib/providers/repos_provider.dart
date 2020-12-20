@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:github_profiles/app/data/models/exceptions.dart';
+import 'package:github_profiles/app/data/exceptions.dart';
 import 'package:github_profiles/app/data/models/repos_info.dart';
 import 'package:github_profiles/app/data/services/github_api.dart';
 import 'package:github_profiles/app/routes/app_routes.dart';
