@@ -1,5 +1,9 @@
 # Github Profiles
 
+## Demo
+
+![](demo/demo.gif)
+
 ## Repo Branches
 
 There are two branches in this repo i.e.
