@@ -30,7 +30,7 @@ class HomePage extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
-                'https://cdn2.iconfinder.com/data/icons/social-icons-33/128/Github-512.png',
+                'https://icon-library.com/images/github-icon-white/github-icon-white-6.jpg',
                 height: 100,
                 width: 100,
               ),
