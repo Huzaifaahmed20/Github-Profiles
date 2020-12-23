@@ -8,10 +8,14 @@ class HomePage extends StatelessWidget {
     final TextEditingController userNameController = TextEditingController();
     final model = context.watch<UserNotifier>();
 
-    Future<void> getUserInfo() async {
+    Future<void> getUserInfo(BuildContext ctx) async {
       if (userNameController.text.isEmpty) return;
-      await context.read<UserNotifier>().fetchUserInfo(userNameController.text);
-      await context.read<UserNotifier>().fetReposInfo(userNameController.text);
+      await context
+          .read<UserNotifier>()
+          .fetchUserInfo(userNameController.text, ctx);
+      await context
+          .read<UserNotifier>()
+          .fetReposInfo(userNameController.text, ctx);
     }
 
     return Scaffold(
@@ -22,7 +26,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
-                'https://cdn2.iconfinder.com/data/icons/social-icons-33/128/Github-512.png',
+                'https://icon-library.com/images/github-icon-white/github-icon-white-6.jpg',
                 height: 100,
                 width: 100,
               ),
@@ -70,7 +74,7 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  onPressed: getUserInfo,
+                  onPressed: () => getUserInfo(context),
                 ),
               ),
             ],

@@ -3,8 +3,6 @@ import 'package:github_profiles/app/data/endpoints.dart';
 
 class DioClient {
   static BaseOptions options = new BaseOptions(
-    headers: {'Accept': 'application/vnd.github.v3+json'},
-    // contentType: 'application/vnd.api+json',
     baseUrl: Endpoints.baseUrl,
     connectTimeout: Endpoints.connectionTimeout,
     receiveTimeout: Endpoints.receiveTimeout,
