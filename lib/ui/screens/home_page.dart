@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_profiles/notifier/user_notifier.dart';
+import 'package:github_profiles/ui/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -51,31 +52,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: model.isLoading
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.center,
-                      children: [
-                        Text('Get my Github Profile'),
-                        model.isLoading
-                            ? Container(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.white,
-                                ),
-                              )
-                            : const SizedBox.shrink()
-                      ],
-                    ),
-                  ),
-                  onPressed: () => getUserInfo(context),
-                ),
+              ProfileButton(
+                isLoading: model.isLoading,
+                onPressed: () => getUserInfo(context),
               ),
             ],
           ),
