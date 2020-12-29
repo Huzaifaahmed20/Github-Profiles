@@ -19,11 +19,9 @@ class CustomButton extends HookWidget {
   Widget build(BuildContext context) {
     final repoControllerState = useProvider(repoControllerProvider.state);
     final userControllerState = useProvider(userControllerProvider.state);
-    final isUserFetching =
-        userControllerState == AsyncValue<UserInfo>.loading();
-    final isReposFetching =
-        repoControllerState == AsyncValue<List<ReposInfo>>.loading();
-    final isLoading = isUserFetching || isReposFetching;
+
+    final isLoading = userControllerState is AsyncLoading ||
+        repoControllerState is AsyncLoading;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 60),
